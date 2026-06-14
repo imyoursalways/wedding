@@ -2,599 +2,565 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Our Custom Wordle ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emma & James - Wedding Invitation</title>
     <style>
-        :root {
-            --correct: #ff3366; 
-            --present: #f1c40f;
-            --absent: #2c2c2e;
-            --bg: #0b0b0d;
-            --tile-border: #222224;
-            --text: #ffffff;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap');
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            height: 100vh;
-            height: -webkit-fill-available; /* Fixed mobile viewport bug */
-            margin: 0;
-            padding: 5px 0;
-            box-sizing: border-box;
-            overflow: hidden;
-            position: relative;
-            -webkit-user-select: none;
-            user-select: none;
+        :root {
+            --bg-blue: #2c345a; /* Deep magical night sky */
+            --header-gold: #ceb081; /* Magical fairy gold */
+            --text-light: #f3deb1; /* Soft glowing cream */
+            --glass-bg: rgba(44, 52, 90, 0.85); /* Semi-transparent backdrop */
         }
 
         html {
-            height: -webkit-fill-available;
+            scroll-behavior: smooth;
         }
 
-        #animationCanvas {
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-blue);
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fixed Background & Star Animation */
+        .background-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background-color: var(--bg-blue);
+            overflow: hidden;
+        }
+
+        /* Star styling (20px size) */
+        .fairy-dust {
+            position: absolute;
+            color: #fff;
+            text-shadow: 0 0 10px var(--header-gold), 0 0 20px var(--header-gold);
+            font-size: 20px; 
+            opacity: 0;
+            animation: float-up 7s infinite ease-in-out;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .fairy-dust::before {
+            content: "✦";
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(105vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .dust-1 { left: 10%; animation-duration: 9s; animation-delay: 0s; }
+        .dust-2 { left: 25%; animation-duration: 12s; animation-delay: 2s; }
+        .dust-3 { left: 40%; animation-duration: 8s; animation-delay: 1s; }
+        .dust-4 { left: 60%; animation-duration: 10s; animation-delay: 3s; }
+        .dust-5 { left: 75%; animation-duration: 9s; animation-delay: 1.5s; }
+        .dust-6 { left: 90%; animation-duration: 14s; animation-delay: 0.5s; }
+        
+        /* --- FINAL Shooting Star Animation --- */
+        .shooting-star {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            will-change: transform; /* Hint to mobile GPUs to accelerate */
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            /* The trailing tail effect */
+            box-shadow: 0 0 10px 0px #fff, 0 0 0 1px rgba(255, 255, 255, 0.1),
+                        0 10px 20px 0px rgba(255, 255, 255, 0.4),
+                        0 -10px 20px 0px rgba(255, 255, 255, 0.4),
+                        10px 0 20px 0px rgba(255, 255, 255, 0.4),
+                        -10px 0 20px 0px rgba(255, 255, 255, 0.4);
+            opacity: 0;
+            animation: shoot-up 3s infinite ease-in;
         }
 
-        header, #board-container, #keyboard {
-            position: relative;
-            z-index: 2; 
-            width: 100%;
-            max-width: 500px;
-            box-sizing: border-box;
+        @keyframes shoot-up {
+            0% {
+                transform: translateY(80vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1; /* Fade in quickly */
+            }
+            85% {
+                opacity: 0.5; /* Start fading out towards the end */
+            }
+            100% {
+                transform: translateY(-80vh) rotate(360deg);
+                opacity: 0; /* Fully transparent and off-screen */
+            }
         }
 
-        header {
-            text-align: center;
-            padding: 5px 0;
-            border-bottom: 1px solid var(--tile-border);
-            background: rgba(11, 11, 13, 0.8);
+        /* Randomize positions, speeds, and delays */
+        .ss-1 {
+            left: 20%;
+            animation-duration: 4s;
+            animation-delay: 1.5s;
+        }
+        .ss-2 {
+            left: 55%;
+            animation-duration: 2.5s;
+            animation-delay: 0s;
+        }
+        .ss-3 {
+            left: 85%;
+            animation-duration: 3.5s;
+            animation-delay: 5s;
+        }
+
+
+        /* Floating Sticky Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(44, 52, 90, 0.95);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(206, 176, 129, 0.2);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
         }
 
-        h1 {
-            margin: 0;
-            font-size: 1.8rem;
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.8rem;
             letter-spacing: 2px;
-            background: linear-gradient(45deg, #ff3366, #ff758c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin: 0 15px;
+            transition: color 0.3s;
         }
 
-        p.subtitle {
-            margin: 3px 0 0 0;
-            color: #b0b0b5;
-            font-size: 0.8rem;
+        nav a:hover {
+            color: var(--header-gold);
         }
 
-        #board-container {
+        /* 50px Padding gaps between sections */
+        section {
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-grow: 1;
-            padding: 10px 0;
-        }
-
-        #board {
-            display: grid;
-            grid-template-rows: repeat(6, 1fr);
-            grid-gap: 5px;
-            width: 280px;  /* Compact dimensions optimized for mobile */
-            height: 340px;
-            max-width: 85vw;
-            max-height: 45vh;
-        }
-
-        .row {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-gap: 5px;
-        }
-
-        .tile {
-            width: 100%;
-            height: 100%;
-            border: 2px solid var(--tile-border);
-            background: rgba(18, 18, 22, 0.85);
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.6rem;
-            font-weight: bold;
-            text-transform: uppercase;
+            padding: 50px 20px; 
             box-sizing: border-box;
-            border-radius: 6px;
         }
 
-        .tile[data-state="pop"] {
-            transform: scale(1.05);
-            border-color: #9e9eaf;
-        }
+        #welcome { padding-top: 120px; padding-bottom: 50px; min-height: auto; }
+        #story { padding-top: 50px; padding-bottom: 50px; }
+        #rsvp { padding-bottom: 80px; }
 
-        .tile[data-state="correct"] { background-color: var(--correct); border-color: var(--correct); }
-        .tile[data-state="present"] { background-color: var(--present); border-color: var(--present); }
-        .tile[data-state="absent"] { background-color: var(--absent); border-color: var(--absent); }
-
-        #keyboard {
-            padding: 0 6px 10px 6px;
-            touch-action: none; /* Prevents double-tap zoom delay on mobile */
-        }
-
-        .keyboard-row {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 6px;
-        }
-
-        .key {
-            background-color: #3a3a3e;
-            color: #ffffff;
-            border: 0;
-            padding: 0;
-            margin: 0 2px;
-            height: 48px; /* Taller tap target for mobile thumbs */
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1rem;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-transform: uppercase;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .key.wide {
-            flex: 1.5;
-            font-size: 0.8rem;
-        }
-
-        .key[data-state="correct"] { background-color: var(--correct); }
-        .key[data-state="present"] { background-color: var(--present); }
-        .key[data-state="absent"] { background-color: var(--absent); }
-
-        #message-container {
-            position: fixed;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .toast {
-            background-color: #ffffff;
-            color: #000000;
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 20;
-            left: 0;
-            top: 0;
+        .section-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(206, 176, 129, 0.3);
+            border-radius: 8px;
+            max-width: 850px;
             width: 100%;
-            height: 100%;
-            background-color: rgba(5, 5, 8, 0.85);
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: #19191f;
-            padding: 25px;
-            border-radius: 16px;
-            max-width: 340px;
-            width: 85%;
+            padding: 50px 40px;
             text-align: center;
-            border: 2px solid #ff3366;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            
+            /* Initial State */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 1s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            will-change: opacity, transform;
         }
 
-        .modal h2 { margin: 0 0 10px 0; color: var(--correct); font-size: 1.6rem; }
-        .modal p { line-height: 1.5; color: #e5e5ea; font-size: 0.95rem; }
+        /* Active In-View State */
+        .section-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-card::before {
+            content: "";
+            position: absolute;
+            top: 15px; left: 15px; right: 15px; bottom: 15px;
+            border: 1px dashed rgba(206, 176, 129, 0.3);
+            border-radius: 6px;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* --- Nested Elements Transition Cascades --- */
+        .ai-image, h2, .section-subtitle, .divider, p, .names, .details, .timeline, .grid, .registry-links, form, .map-container {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            will-change: opacity, transform;
+        }
+
+        /* Trigger transitions only when parent card gains .visible */
+        .section-card.visible .ai-image { opacity: 0.9; transform: translateY(0); transition-delay: 0.1s; }
+        .section-card.visible h2 { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
+        .section-card.visible .section-subtitle { opacity: 0.8; transform: translateY(0); transition-delay: 0.2s; }
+        .section-card.visible .divider { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
+        .section-card.visible .names { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+        .section-card.visible .intro { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
+        .section-card.visible .details { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+        .section-card.visible p { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+        .section-card.visible .timeline { opacity: 1; transform: translateY(0); transition-delay: 0.35s; }
+        .section-card.visible .map-container { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+        .section-card.visible form { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+
+        /* AI Image Styling */
+        .ai-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--header-gold);
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(206, 176, 129, 0.3);
+            
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--text-light);
+            
+        }
+
+        .divider {
+            margin: 20px auto;
+            width: 60px;
+            height: 1px;
+            background: var(--header-gold);
+            
+        }
+
+        .divider::after {
+            content: "✦";
+            position: absolute;
+            top: -12px;
+            left: calc(50% - 6px);
+            color: var(--header-gold);
+            font-size: 14px;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            margin: 0 auto 20px auto;
+            max-width: 600px;
+            font-weight: 300;
+            
+        }
+
+        .names {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 3.8rem;
+            color: var(--header-gold);
+            margin: 20px 0;
+            line-height: 1.2;
+            
+        }
+
+        .timeline {
+            margin: 20px auto;
+            max-width: 500px;
+            text-align: left;
+            
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+            border-left: 1px solid var(--header-gold);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: "✦";
+            position: absolute;
+            left: -6px;
+            top: -2px;
+            color: var(--header-gold);
+            background-color: var(--bg-blue);
+            font-size: 12px;
+            width: 15px;
+            text-align: center;
+        }
+
+        .time {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.9rem;
+            color: var(--header-gold);
+            margin-bottom: 5px;
+        }
+
+        .event-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+        }
+
+        .map-container {
+            margin-top: 30px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 6px;
+            border: 1px solid rgba(206, 176, 129, 0.3);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 450px;
+            margin: 0 auto;
+            text-align: left;
+            
+        }
+
+        label {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.85rem;
+            color: var(--header-gold);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        input, select, textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(206, 176, 129, 0.4);
+            color: var(--text-light);
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--header-gold);
+            box-shadow: 0 0 10px rgba(206, 176, 129, 0.2);
+        }
 
         .btn {
-            background: linear-gradient(45deg, #ff3366, #ff5e7e);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
+            display: inline-block;
             margin-top: 15px;
-            width: 100%;
-            box-sizing: border-box;
+            padding: 12px 40px;
+            background-color: transparent;
+            color: var(--header-gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            border: 1px solid var(--header-gold);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: 'Cinzel Decorative', serif;
+            text-align: center;
+            
         }
 
-        @keyframes flip {
-            0% { transform: rotateX(0deg); }
-            45% { transform: rotateX(90deg); }
-            55% { transform: rotateX(90deg); }
-            100% { transform: rotateX(0deg); }
+        .btn:hover {
+            background-color: var(--header-gold);
+            color: var(--bg-blue);
+            box-shadow: 0 0 20px rgba(206, 176, 129, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            nav { flex-wrap: wrap; padding: 10px 0; }
+            nav a { font-size: 0.7rem; margin: 5px 10px; }
+            .names { font-size: 2.8rem; }
+            h2 { font-size: 1.8rem; }
+            .section-card { padding: 40px 20px; }
+            .ai-image { height: auto; }
+            section { padding: 30px 10px; }
+            #welcome { padding-top: 100px; padding-bottom: 30px; }
+            #story { padding-top: 30px; }
+            .map-container iframe { height: 300px; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="animationCanvas"></canvas>
-
-    <header>
-        <h1>WORDLE: 🌹❤️ Chakkara and Ponnumma 🌹❤️</h1>
-        <p class="subtitle">Every word is a milestone. Guess our secret word.</p>
-    </header>
-
-    <div id="message-container"></div>
-
-    <div id="board-container">
-        <div id="board"></div>
+    <div class="background-container">
+        <!-- Existing fairy dust -->
+        <div class="fairy-dust dust-1"></div>
+        <div class="fairy-dust dust-2"></div>
+        <div class="fairy-dust dust-3"></div>
+        <div class="fairy-dust dust-4"></div>
+        <div class="fairy-dust dust-5"></div>
+        <div class="fairy-dust dust-6"></div>
+        
+        <!-- Corrected Shooting Stars -->
+        <div class="shooting-star ss-1"></div>
+        <div class="shooting-star ss-2"></div>
+        <div class="shooting-star ss-3"></div>
     </div>
 
-    <div id="keyboard">
-        <div class="keyboard-row">
-            <button class="key" data-key="Q">Q</button>
-            <button class="key" data-key="W">W</button>
-            <button class="key" data-key="E">E</button>
-            <button class="key" data-key="R">R</button>
-            <button class="key" data-key="T">T</button>
-            <button class="key" data-key="Y">Y</button>
-            <button class="key" data-key="U">U</button>
-            <button class="key" data-key="I">I</button>
-            <button class="key" data-key="O">O</button>
-            <button class="key" data-key="P">P</button>
+    <nav>
+        <a href="#welcome">Welcome</a>
+        <a href="#story">Our Story</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#location">Location</a>
+        <a href="#rsvp">RSVP</a>
+    </nav>
+    
+    <!-- SECTION 1: WELCOME -->
+    <section id="welcome">
+         <div class="section-card">
+            <!-- AI Generated Cover Image -->
+            <img src="image_1.png" alt="Enchanted Forest" class="ai-image">
+            
+            <div class="intro" >
+                With a touch of faith, trust, and pixie dust...<br>
+                We invite you to share in our happily ever after
+            </div>
+            <h1 class="names">Swathi & Jibin</h1>
+            <div class="divider"></div>
+            <div class="details" >
+                Wednesday, the nineteenth of August<br>
+                Two Thousand and Twenty-Six<br>
+                at 6 o'clock in the morning (08/19/2026)
+                <span style="display: block; color: var(--header-gold); margin-top: 10px;">Guruvayur Sree Krishna Temple </span>
+            </div>
         </div>
-        <div class="keyboard-row">
-            <button class="key" data-key="A">A</button>
-            <button class="key" data-key="S">S</button>
-            <button class="key" data-key="D">D</button>
-            <button class="key" data-key="F">F</button>
-            <button class="key" data-key="G">G</button>
-            <button class="key" data-key="H">H</button>
-            <button class="key" data-key="J">J</button>
-            <button class="key" data-key="K">K</button>
-            <button class="key" data-key="L">L</button>
-        </div>
-        <div class="keyboard-row">
-            <button class="key wide" data-key="ENTER">ENTER</button>
-            <button class="key" data-key="Z">Z</button>
-            <button class="key" data-key="X">X</button>
-            <button class="key" data-key="C">C</button>
-            <button class="key" data-key="V">V</button>
-            <button class="key" data-key="B">B</button>
-            <button class="key" data-key="N">N</button>
-            <button class="key" data-key="M">M</button>
-            <button class="key wide" data-key="BACKSPACE">BACK</button>
-        </div>
-    </div>
+    </section>
 
-    <div id="endModal" class="modal">
-        <div class="modal-content">
-            <h2 id="modalTitle">Perfect Match! 🌹❤️</h2>
-            <p id="modalSecretWord"></p>
-            <p id="modalMessage"></p>
-            <button class="btn" onclick="nextWord()">Reveal Next Memory</button>
+    <!-- SECTION 2: OUR STORY -->
+    <section id="story">
+        <div class="section-card">
+            <h2>Our Story</h2>
+            <div class="section-subtitle">Second star to the right, and straight on 'til morning</div>
+            <div class="divider"></div>
+            <!-- AI Generated Story Image -->
+            <img src="image_2.png" alt="Our Story" class="ai-image" style="margin-top: 10px;">
+            <p>Our journey began much like a fairytale. Two paths crossing unexpectedly, leading to endless conversations, late-night adventures, and a shared realization that we'd found our perfect match.</p>
+            <p>From exploring real magic in our daily lives to planning this special celebration, every step together has been a wonder. We cannot wait to begin this next chapter with the family and friends we hold dearest.</p>
         </div>
-    </div>
+    </section>
+
+    <!-- SECTION 3: THE SCHEDULE -->
+    <section id="schedule">
+        <div class="section-card">
+            <h2>The Schedule</h2>
+            <div class="section-subtitle">Celebrate the Magic</div>
+            <div class="divider"></div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="time">6:00 AM - 7:00 AM</div>
+                    <h3 class="event-title">Thalikettu</h3>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">9:00 AM - 11:00 AM</div>
+                    <h3 class="event-title">Wedding Ceremony</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 0;">Gokulam Vanamala Auditorium, Guruvayur</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: LOCATION -->
+    <section id="location">
+        <div class="section-card">
+            <h2>Venue & Location</h2>
+            <div class="section-subtitle">Guruvayur Sree Krishna Temple</div>
+            <div class="divider"></div>
+            <div class="map-container">
+                <!-- Embedded Google Map with Sree Krishna Temple Pin -->
+                <iframe 
+                    src="https://maps.google.com/maps?q=Guruvayur%20Sree%20Krishna%20Temple,%20Guruvayur,%20Kerala,%20India&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Guruvayur+Sree+Krishna+Temple" target="_blank" class="btn">Get Directions</a>
+        </div>
+    </section>
+
+
+    <!-- SECTION 6: RSVP -->
+    <section id="rsvp">
+        <div class="section-card">
+            <h2>Will You Join Us?</h2>
+            <div class="section-subtitle">Kindly RSVP by August 15th, 2026</div>
+            <div class="divider"></div>
+            
+            <form action="#" method="POST">
+                <label for="name">Your Name(s)</label>
+                <input type="text" id="name" name="name" placeholder="First and Last Name" required>
+
+                <label for="attendance">Will you attend?</label>
+                <select id="attendance" name="attendance" required>
+                    <option value="" disabled selected>Please choose...</option>
+                    <option value="yes">Accepts with pleasure</option>
+                    <option value="no">Declines with regret</option>
+                </select>
+
+                <label for="message">Note to the Couple (Optional)</label>
+                <textarea id="message" name="message" rows="4" placeholder="Share a warm wish!"></textarea>
+
+                <button type="submit" class="btn">Submit RSVP</button>
+            </form>
+        </div>
+    </section>
 
     <script>
-        // ==========================================
-        // CONFIGURATION & WORDS
-        // ==========================================
-        const JOKE_WORDS = [
-            { word: "BLOOM", hint: "It lingered in bud, waited for us to make the moment beautiful🌸🌸." },
-            { word: "APRIL", hint: "That unforgettable month when our lips first met is forever burned into my soul; I can still taste the sweetness of that moment.❤️" },
-            { word: "SEOUL", hint:"If you look at a globe, this five-letter destination is a bustling metropolis across the sea. But to me, it isn't just a coordinates on a map; it is the sacred place where my life truly began, under a canopy of pink petals." },
-            { word: "LATTE", hint: "☕All our memories we store here and our favorite drink☕." },
-            { word: "LINDT", hint: "They spell out a world-renowned name in luxury chocolate." },
-        ];
+        document.addEventListener("DOMContentLoaded", function() {
+            // Highly robust trigger points
+            const appearOptions = {
+                threshold: 0.05, // Trigger as soon as 5% of the element is visible
+                rootMargin: "0px 0px -50px 0px"
+            };
 
-        let currentWordIndex = 0;
-        let secretWord = JOKE_WORDS[currentWordIndex].word;
-        let hintMessage = JOKE_WORDS[currentWordIndex].hint;
-        let currentRow = 0, currentTile = 0;
-        let guesses = ["", "", "", "", "", ""];
-        let gameOver = false;
-
-        const board = document.getElementById("board");
-        function createBoard() {
-            board.innerHTML = "";
-            for (let i = 0; i < 6; i++) {
-                const row = document.createElement("div");
-                row.className = "row";
-                for (let j = 0; j < 5; j++) {
-                    const tile = document.createElement("div");
-                    tile.className = "tile";
-                    row.appendChild(tile);
-                }
-                board.appendChild(row);
-            }
-        }
-        createBoard();
-
-        // Mobile Friendly Event Binding
-        document.querySelectorAll(".key").forEach(key => {
-            key.addEventListener("touchstart", (e) => {
-                e.preventDefault(); // Prevents simulated mouse click latency delay
-                handleInput(key.getAttribute("data-key"));
-            }, {passive: false});
-            key.addEventListener("click", () => handleInput(key.getAttribute("data-key")));
-        });
-
-        window.addEventListener("keydown", (e) => {
-            if (gameOver) return;
-            let key = e.key.toUpperCase();
-            if (key === "ENTER") handleInput("ENTER");
-            else if (key === "BACKSPACE" || key === "DELETE") handleInput("BACKSPACE");
-            else if (/^[A-Z]$/.test(key)) handleInput(key);
-        });
-
-        function handleInput(key) {
-            if (gameOver) return;
-            if (key === "ENTER") submitGuess();
-            else if (key === "BACKSPACE") deleteLetter();
-            else addLetter(key);
-        }
-
-        function addLetter(letter) {
-            if (currentTile < 5 && currentRow < 6) {
-                const rows = board.querySelectorAll(".row");
-                const tiles = rows[currentRow].querySelectorAll(".tile");
-                tiles[currentTile].textContent = letter;
-                tiles[currentTile].setAttribute("data-state", "pop");
-                guesses[currentRow] += letter;
-                currentTile++;
-            }
-        }
-
-        function deleteLetter() {
-            if (currentTile > 0) {
-                currentTile--;
-                const rows = board.querySelectorAll(".row");
-                const tiles = rows[currentRow].querySelectorAll(".tile");
-                tiles[currentTile].textContent = "";
-                tiles[currentTile].removeAttribute("data-state");
-                guesses[currentRow] = guesses[currentRow].slice(0, -1);
-            }
-        }
-
-        function submitGuess() {
-            const guess = guesses[currentRow];
-            if (guess.length < 5) {
-                showToast("Not enough letters!");
-                return;
-            }
-
-            const rows = board.querySelectorAll(".row");
-            const tiles = rows[currentRow].querySelectorAll(".tile");
-            let targetWord = secretWord;
-            let tileStates = Array(5).fill("absent");
-            let targetLetterCounts = {};
-
-            for (let letter of targetWord) targetLetterCounts[letter] = (targetLetterCounts[letter] || 0) + 1;
-            for (let i = 0; i < 5; i++) {
-                if (guess[i] === targetWord[i]) {
-                    tileStates[i] = "correct";
-                    targetLetterCounts[guess[i]]--;
-                }
-            }
-            for (let i = 0; i < 5; i++) {
-                if (tileStates[i] !== "correct" && targetWord.includes(guess[i])) {
-                    if (targetLetterCounts[guess[i]] > 0) {
-                        tileStates[i] = "present";
-                        targetLetterCounts[guess[i]]--;
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // FIX: Once an element fades in, we stop observing it.
+                        // This prevents any scroll feedback loops and makes scrolling 100% jitter-free.
+                        observer.unobserve(entry.target);
                     }
-                }
-            }
-
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    tiles[i].style.animation = "flip 0.4s ease forwards";
-                    tiles[i].setAttribute("data-state", tileStates[i]);
-                    updateKeyboardColors(guess[i], tileStates[i]);
-                    if (tileStates[i] === "correct") spawnExplosionLayer(8, false);
-                }, i * 90);
-            }
-
-            setTimeout(() => {
-                if (guess === secretWord) endGame(true);
-                else if (currentRow === 5) endGame(false);
-                else { currentRow++; currentTile = 0; }
-            }, 550);
-        }
-
-        function updateKeyboardColors(letter, state) {
-            const keyEl = document.querySelector(`.key[data-key="${letter}"]`);
-            if (!keyEl) return;
-            const currentState = keyEl.getAttribute("data-state");
-            if (currentState === "correct") return;
-            if (currentState === "present" && state === "absent") return;
-            keyEl.setAttribute("data-state", state);
-        }
-
-        function showToast(text) {
-            const container = document.getElementById("message-container");
-            const toast = document.createElement("div");
-            toast.className = "toast";
-            toast.textContent = text;
-            container.appendChild(toast);
-            setTimeout(() => { toast.remove(); }, 1800);
-        }
-
-        function endGame(isWin) {
-            gameOver = true;
-            const modal = document.getElementById("endModal");
-            document.getElementById("modalSecretWord").innerHTML = `Word was: <strong>${secretWord}</strong>`;
-            document.getElementById("modalMessage").textContent = isWin ? hintMessage : `Always love you anyway! ❤️ ${hintMessage}`;
-            if (isWin) {
-                for(let burst = 0; burst < 10; burst++) {
-                    setTimeout(() => { spawnExplosionLayer(15, true); }, burst * 100);
-                }
-            }
-            setTimeout(() => { modal.style.display = "flex"; }, 600);
-        }
-
-        function nextWord() {
-            currentWordIndex = (currentWordIndex + 1) % JOKE_WORDS.length;
-            secretWord = JOKE_WORDS[currentWordIndex].word;
-            hintMessage = JOKE_WORDS[currentWordIndex].hint;
-            currentRow = 0; currentTile = 0; guesses = ["", "", "", "", "", ""]; gameOver = false;
-            document.getElementById("endModal").style.display = "none";
-            createBoard();
-            document.querySelectorAll(".key").forEach(k => k.removeAttribute("data-state"));
-        }
-
-        // ==========================================
-        // HIGH REFRESH RATE HARDWARE ACCELERATED CANVAS
-        // ==========================================
-        const canvas = document.getElementById("animationCanvas");
-        const ctx = canvas.getContext("2d");
-        let particles = [];
-        
-        const emojiList = ["🌹", "💍", "🌸", "🌹", "❤️", "💖", "💝", "🐾","💍", "🐶", "🐱", "✨","🌸"];
-        const cachedCanvases = {};
-
-        // Pre-render font emojis into static pixel images on startup to eliminate layout recalculations inside rendering loop
-        function preRenderEmojis() {
-            const sizes = [20, 30, 45, 60]; // Pre-caches different scaling profiles
-            emojiList.forEach(emoji => {
-                cachedCanvases[emoji] = {};
-                sizes.forEach(size => {
-                    const offscreenCanvas = document.createElement("canvas");
-                    offscreenCanvas.width = size * 1.5;
-                    offscreenCanvas.height = size * 1.5;
-                    const oCtx = offscreenCanvas.getContext("2d");
-                    oCtx.font = `${size}px Arial`;
-                    oCtx.textAlign = "center";
-                    oCtx.textBaseline = "middle";
-                    oCtx.fillText(emoji, offscreenCanvas.width / 2, offscreenCanvas.height / 2);
-                    cachedCanvases[emoji][size] = offscreenCanvas;
                 });
+            }, appearOptions);
+
+            const cards = document.querySelectorAll('.section-card');
+            cards.forEach(card => {
+                appearOnScroll.observe(card);
             });
-        }
-        preRenderEmojis();
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class SmoothParticle {
-            constructor(type = "ambient") {
-                this.type = type;
-                this.char = emojiList[Math.floor(Math.random() * emojiList.length)];
-                
-                // Pick cached size template buckets
-                if (this.char === "🌹") {
-                    this.sizeIndex = Math.random() > 0.5 ? 60 : 45;
-                } else {
-                    this.sizeIndex = Math.random() > 0.5 ? 30 : 20;
-                }
-
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotationSpeed = (Math.random() - 0.5) * 0.02;
-                this.alpha = 1;
-
-                if (this.type === "ambient") {
-                    this.x = Math.random() * canvas.width;
-                    this.y = canvas.height + Math.random() * 100;
-                    this.vx = (Math.random() - 0.5) * 0.8;
-                    this.vy = -(Math.random() * 0.8 + 0.3);
-                    this.alpha = Math.random() * 0.25 + 0.1; 
-                } else if (this.type === "burst") {
-                    this.x = canvas.width / 2;
-                    this.y = canvas.height / 2.2;
-                    const angle = Math.random() * Math.PI * 2;
-                    const speed = Math.random() * 4 + 2;
-                    this.vx = Math.cos(angle) * speed;
-                    this.vy = Math.sin(angle) * speed;
-                    this.decay = Math.random() * 0.02 + 0.015;
-                } else {
-                    // Rain/shower down elegantly
-                    this.x = Math.random() * canvas.width;
-                    this.y = -50;
-                    this.vx = (Math.random() - 0.5) * 2;
-                    this.vy = Math.random() * 3 + 2;
-                    this.decay = Math.random() * 0.006 + 0.003;
-                }
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.rotation += this.rotationSpeed;
-                if (this.type === "ambient") {
-                    if (this.y < -60) {
-                        this.y = canvas.height + 60;
-                        this.x = Math.random() * canvas.width;
-                    }
-                } else {
-                    this.alpha -= this.decay;
-                }
-            }
-
-            draw() {
-                if (this.alpha <= 0) return;
-                const cache = cachedCanvases[this.char][this.sizeIndex];
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation);
-                // Draws pre-rasterized flat pixel assets instantly (Super performant on phones)
-                ctx.drawImage(cache, -cache.width / 2, -cache.height / 2);
-                ctx.restore();
-            }
-        }
-
-        // Ambient load safety thresholds for slow mobile processors
-        const ambientCount = window.innerWidth < 600 ? 45 : 90;
-        for (let i = 0; i < ambientCount; i++) {
-            particles.push(new SmoothParticle("ambient"));
-        }
-
-        function spawnExplosionLayer(count, isVictoryShower = false) {
-            const mode = isVictoryShower ? "shower" : "burst";
-            // Hard limit overall particle size stack to guard frame rates
-            if (particles.length > 250) return;
-            for(let i = 0; i < count; i++) {
-                particles.push(new SmoothParticle(mode));
-            }
-        }
-
-        function runEngine() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = particles.length - 1; i >= 0; i--) {
-                particles[i].update();
-                particles[i].draw();
-                if (particles[i].type !== "ambient" && particles[i].alpha <= 0) {
-                    particles.splice(i, 1);
-                }
-            }
-            requestAnimationFrame(runEngine);
-        }
-        runEngine();
+        });
     </script>
 </body>
 </html>
