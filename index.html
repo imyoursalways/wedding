@@ -1,133 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emma & James - Wedding Invitation</title>
+    <title>Swathi & Jibin - Wedding Invitation</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Dancing+Script:wght@400;700&display=swap');
 
         :root {
-            --bg-blue: #2c345a; /* Deep magical night sky */
-            --header-gold: #ceb081; /* Magical fairy gold */
-            --text-light: #f3deb1; /* Soft glowing cream */
-            --glass-bg: rgba(44, 52, 90, 0.85); /* Semi-transparent backdrop */
+            --header-gold: #DAB96B;
+            --text-light: #FAF3E0;
+            --glass-bg: rgba(20, 20, 20, 0.9);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* Basic Setup & Background */
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-blue);
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Dancing Script', cursive;
             color: var(--text-light);
-            overflow-x: hidden;
-            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            perspective: 2500px;
+            background-color: #1a1a1a;
+            font-size: 1.3rem;
         }
 
-        /* Fixed Background & Star Animation */
         .background-container {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background-color: var(--bg-blue);
-            overflow: hidden;
-        }
-
-        /* Star styling (20px size) */
-        .fairy-dust {
-            position: absolute;
-            color: #fff;
-            text-shadow: 0 0 10px var(--header-gold), 0 0 20px var(--header-gold);
-            font-size: 20px; 
-            opacity: 0;
-            animation: float-up 7s infinite ease-in-out;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        .fairy-dust::before {
-            content: "✦";
-        }
-
-        @keyframes float-up {
-            0% { transform: translateY(105vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.8; }
-            80% { opacity: 0.6; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        .dust-1 { left: 10%; animation-duration: 9s; animation-delay: 0s; }
-        .dust-2 { left: 25%; animation-duration: 12s; animation-delay: 2s; }
-        .dust-3 { left: 40%; animation-duration: 8s; animation-delay: 1s; }
-        .dust-4 { left: 60%; animation-duration: 10s; animation-delay: 3s; }
-        .dust-5 { left: 75%; animation-duration: 9s; animation-delay: 1.5s; }
-        .dust-6 { left: 90%; animation-duration: 14s; animation-delay: 0.5s; }
-        
-        /* --- FINAL Shooting Star Animation --- */
-        .shooting-star {
-            position: absolute;
             top: 0;
             left: 0;
-            width: 3px;
-            height: 3px;
-            background: #fff;
-            border-radius: 50%;
-            /* The trailing tail effect */
-            box-shadow: 0 0 10px 0px #fff, 0 0 0 1px rgba(255, 255, 255, 0.1),
-                        0 10px 20px 0px rgba(255, 255, 255, 0.4),
-                        0 -10px 20px 0px rgba(255, 255, 255, 0.4),
-                        10px 0 20px 0px rgba(255, 255, 255, 0.4),
-                        -10px 0 20px 0px rgba(255, 255, 255, 0.4);
-            opacity: 0;
-            animation: shoot-up 3s infinite ease-in;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-image: url('https://images.unsplash.com/photo-1541336032412-2048a678540d?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%) brightness(0.4);
         }
 
-        @keyframes shoot-up {
-            0% {
-                transform: translateY(80vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1; /* Fade in quickly */
-            }
-            85% {
-                opacity: 0.5; /* Start fading out towards the end */
-            }
-            100% {
-                transform: translateY(-80vh) rotate(360deg);
-                opacity: 0; /* Fully transparent and off-screen */
-            }
-        }
-
-        /* Randomize positions, speeds, and delays */
-        .ss-1 {
-            left: 20%;
-            animation-duration: 4s;
-            animation-delay: 1.5s;
-        }
-        .ss-2 {
-            left: 55%;
-            animation-duration: 2.5s;
-            animation-delay: 0s;
-        }
-        .ss-3 {
-            left: 85%;
-            animation-duration: 3.5s;
-            animation-delay: 5s;
-        }
-
-
-        /* Floating Sticky Navigation Bar */
+        /* --- Navigation --- */
         nav {
             position: fixed;
-            top: 0; left: 0; width: 100%;
-            background: rgba(44, 52, 90, 0.95);
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.9);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(206, 176, 129, 0.2);
+            border-bottom: 1px solid rgba(218, 185, 107, 0.2);
             z-index: 100;
             display: flex;
             justify-content: center;
@@ -137,115 +61,142 @@
         nav a {
             color: var(--text-light);
             text-decoration: none;
-            text-transform: uppercase;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            margin: 0 15px;
+            font-size: 1.3rem;
+            margin: 0 20px;
             transition: color 0.3s;
+            cursor: pointer;
+            font-weight: 700;
         }
 
-        nav a:hover {
+        nav a:hover,
+        nav a.active {
             color: var(--header-gold);
         }
 
-        /* 50px Padding gaps between sections */
-        section {
+        /* --- SHARED BOOK & PAGE STYLES --- */
+        .book,
+        .mobile-book {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            cursor: pointer;
+            margin-top: 50px;
+        }
+
+        .page {
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+            transform-origin: left;
+        }
+
+        .front,
+        .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--glass-bg);
+            backface-visibility: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 50px 20px; 
             box-sizing: border-box;
+            overflow-y: auto;
         }
 
-        #welcome { padding-top: 120px; padding-bottom: 50px; min-height: auto; }
-        #story { padding-top: 50px; padding-bottom: 50px; }
-        #rsvp { padding-bottom: 80px; }
-
-        .section-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(206, 176, 129, 0.3);
-            border-radius: 8px;
-            max-width: 850px;
-            width: 100%;
-            padding: 50px 40px;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            box-sizing: border-box;
-            position: relative;
-            overflow: hidden;
-            
-            /* Initial State */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 1s cubic-bezier(0.215, 0.610, 0.355, 1.000);
-            will-change: opacity, transform;
+        .back {
+            transform: rotateY(180deg);
         }
 
-        /* Active In-View State */
-        .section-card.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .page.flipped {
+            transform: rotateY(-180deg);
         }
 
-        .section-card::before {
-            content: "";
+        /* --- DESKTOP BOOK --- */
+        .book {
+            width: 90vw;
+            height: 80vh;
+        }
+
+        .book .page {
+            width: calc(90vw / 2);
+            height: 100%;
             position: absolute;
-            top: 15px; left: 15px; right: 15px; bottom: 15px;
-            border: 1px dashed rgba(206, 176, 129, 0.3);
-            border-radius: 6px;
-            pointer-events: none;
-            z-index: 5;
+            top: 0;
+            right: 0;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* --- Nested Elements Transition Cascades --- */
-        .ai-image, h2, .section-subtitle, .divider, p, .names, .details, .timeline, .grid, .registry-links, form, .map-container {
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000);
-            will-change: opacity, transform;
+        .book .front,
+        .book .back {
+            padding: 40px;
         }
 
-        /* Trigger transitions only when parent card gains .visible */
-        .section-card.visible .ai-image { opacity: 0.9; transform: translateY(0); transition-delay: 0.1s; }
-        .section-card.visible h2 { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
-        .section-card.visible .section-subtitle { opacity: 0.8; transform: translateY(0); transition-delay: 0.2s; }
-        .section-card.visible .divider { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
-        .section-card.visible .names { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
-        .section-card.visible .intro { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
-        .section-card.visible .details { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
-        .section-card.visible p { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
-        .section-card.visible .timeline { opacity: 1; transform: translateY(0); transition-delay: 0.35s; }
-        .section-card.visible .map-container { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
-        .section-card.visible form { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+        .book .static-page {
+            width: calc(90vw / 2);
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-shadow: inset 10px 0px 20px -10px rgba(0, 0, 0, 0.4);
+            background-color: var(--glass-bg);
+            background-image: url('image_1.png');
+            background-size: auto 95%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-        /* AI Image Styling */
-        .ai-image {
+
+        /* --- MOBILE BOOK --- */
+        .mobile-book {
+            width: 95vw;
+            height: 80vh;
+        }
+
+        .mobile-book .page {
             width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 6px;
-            margin-bottom: 30px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .mobile-book .front {
+            padding: 30px 25px;
+        }
+
+        .mobile-book #mobile-cover-page .front {
+            background-image: url('image_1.png');
+            background-size: auto 95%;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 0;
+        }
+
+        .mobile-book .back {
+            display: none;
+        }
+
+        /* --- Content Styling --- */
+        .page-content {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1.names {
+            font-family: 'Alex Brush', cursive;
+            font-size: 5rem;
+            color: var(--header-gold);
+            margin: 10px 0;
+            font-weight: 400;
         }
 
         h2 {
-            font-family: 'Cinzel Decorative', serif;
+            font-family: 'Alex Brush', cursive;
+            font-size: 4.5rem;
             color: var(--header-gold);
-            font-size: 2.2rem;
-            margin-top: 0;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(206, 176, 129, 0.3);
-            
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            font-style: italic;
-            margin-bottom: 30px;
-            color: var(--text-light);
-            
+            margin-bottom: 5px;
+            font-weight: 400;
         }
 
         .divider {
@@ -253,7 +204,7 @@
             width: 60px;
             height: 1px;
             background: var(--header-gold);
-            
+            position: relative;
         }
 
         .divider::after {
@@ -265,302 +216,232 @@
             font-size: 14px;
         }
 
-        p {
-            font-size: 1.25rem;
-            line-height: 1.8;
-            margin: 0 auto 20px auto;
-            max-width: 600px;
-            font-weight: 300;
-            
+        p,
+        .details,
+        .intro {
+            font-size: 1.6rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
 
-        .names {
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: 3.8rem;
-            color: var(--header-gold);
-            margin: 20px 0;
-            line-height: 1.2;
-            
+        .ai-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 6px;
+            margin-top: 0px;
         }
 
         .timeline {
-            margin: 20px auto;
-            max-width: 500px;
             text-align: left;
-            
+            width: 100%;
         }
 
         .timeline-item {
             position: relative;
-            padding-left: 30px;
-            margin-bottom: 30px;
+            padding-left: 25px;
+            margin-bottom: 25px;
             border-left: 1px solid var(--header-gold);
-        }
-
-        .timeline-item:last-child {
-            margin-bottom: 0;
         }
 
         .timeline-item::before {
             content: "✦";
             position: absolute;
-            left: -6px;
-            top: -2px;
+            left: -7px;
+            top: 5px;
             color: var(--header-gold);
-            background-color: var(--bg-blue);
+            background-color: var(--glass-bg);
             font-size: 12px;
-            width: 15px;
-            text-align: center;
         }
 
         .time {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
             color: var(--header-gold);
-            margin-bottom: 5px;
+            font-weight: 700;
         }
 
         .event-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin: 0 0 5px 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2px 0 0 0;
         }
 
-        .map-container {
-            margin-top: 30px;
+        /* --- MEDIA QUERY SWITCH --- */
+        @media (min-width: 901px) {
+            .mobile-book {
+                display: none;
+            }
         }
 
-        .map-container iframe {
-            width: 100%;
-            height: 400px;
-            border-radius: 6px;
-            border: 1px solid rgba(206, 176, 129, 0.3);
-        }
+        @media (max-width: 900px) {
+            .book {
+                display: none;
+            }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            max-width: 450px;
-            margin: 0 auto;
-            text-align: left;
-            
-        }
+            nav a[data-desktop-only] {
+                display: none;
+            }
 
-        label {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 0.85rem;
-            color: var(--header-gold);
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
+            nav a[data-mobile-only] {
+                display: inline-block;
+            }
 
-        input, select, textarea {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(206, 176, 129, 0.4);
-            color: var(--text-light);
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--header-gold);
-            box-shadow: 0 0 10px rgba(206, 176, 129, 0.2);
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 40px;
-            background-color: transparent;
-            color: var(--header-gold);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.9rem;
-            border: 1px solid var(--header-gold);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-family: 'Cinzel Decorative', serif;
-            text-align: center;
-            
-        }
-
-        .btn:hover {
-            background-color: var(--header-gold);
-            color: var(--bg-blue);
-            box-shadow: 0 0 20px rgba(206, 176, 129, 0.5);
-        }
-
-        @media (max-width: 768px) {
-            nav { flex-wrap: wrap; padding: 10px 0; }
-            nav a { font-size: 0.7rem; margin: 5px 10px; }
-            .names { font-size: 2.8rem; }
-            h2 { font-size: 1.8rem; }
-            .section-card { padding: 40px 20px; }
-            .ai-image { height: auto; }
-            section { padding: 30px 10px; }
-            #welcome { padding-top: 100px; padding-bottom: 30px; }
-            #story { padding-top: 30px; }
-            .map-container iframe { height: 300px; }
+            h1.names { font-size: 4rem; }
+            h2 { font-size: 3rem; }
+            p, .details, .intro { font-size: 1.3rem; }
+            nav a { font-size: 1.1rem; margin: 0 10px; }
         }
     </style>
 </head>
-<body>
 
-    <div class="background-container">
-        <!-- Existing fairy dust -->
-        <div class="fairy-dust dust-1"></div>
-        <div class="fairy-dust dust-2"></div>
-        <div class="fairy-dust dust-3"></div>
-        <div class="fairy-dust dust-4"></div>
-        <div class="fairy-dust dust-5"></div>
-        <div class="fairy-dust dust-6"></div>
-        
-        <!-- Corrected Shooting Stars -->
-        <div class="shooting-star ss-1"></div>
-        <div class="shooting-star ss-2"></div>
-        <div class="shooting-star ss-3"></div>
-    </div>
+<body>
+<audio id="background-music" loop src="music_1.mp3"></audio>
+    <div class="background-container"></div>
 
     <nav>
-        <a href="#welcome">Welcome</a>
-        <a href="#story">Our Story</a>
-        <a href="#schedule">Schedule</a>
-        <a href="#location">Location</a>
-        <a href="#rsvp">RSVP</a>
+        <a data-page-desktop="0" data-page-mobile="1">Welcome</a>
+        <a data-page-desktop="1" data-page-mobile="2">Our Story</a>
+        <a data-page-desktop="2" data-page-mobile="3">Schedule</a>
+        <a data-page-desktop="3" data-page-mobile="4" style="display: none;">Thank You</a>
     </nav>
-    
-    <!-- SECTION 1: WELCOME -->
-    <section id="welcome">
-         <div class="section-card">
-            <!-- AI Generated Cover Image -->
-            <img src="image_1.png" alt="Enchanted Forest" class="ai-image">
-            
-            <div class="intro" >
-                With a touch of faith, trust, and pixie dust...<br>
-                We invite you to share in our happily ever after
-            </div>
+
+    <!-- DESKTOP BOOK -->
+    <div class="book">
+        <div class="static-page"></div>
+        <div class="page" id="dp1">
+            <div class="front"><div class="page-content" id="desktop-welcome"></div></div>
+            <div class="back"><div class="page-content" id="desktop-story"></div></div>
+        </div>
+        <div class="page" id="dp2">
+            <div class="front"><div class="page-content" id="desktop-schedule"></div></div>
+            <div class="back"><div class="page-content" id="desktop-thankyou"></div></div>
+        </div>
+    </div>
+
+    <!-- MOBILE BOOK -->
+    <div class="mobile-book">
+        <div class="page" id="mobile-cover-page"><div class="front"></div></div>
+        <div class="page" id="mp1"><div class="front"><div class="page-content" id="mobile-welcome"></div></div></div>
+        <div class="page" id="mp2"><div class="front"><div class="page-content" id="mobile-story"></div></div></div>
+        <div class="page" id="mp3"><div class="front"><div class="page-content" id="mobile-schedule"></div></div></div>
+        <div class="page" id="mp4"><div class="front"><div class="page-content" id="mobile-thankyou"></div></div></div>
+    </div>
+
+    <!-- Universal Content Source -->
+    <div id="content-source" style="display: none;">
+        <div id="content-welcome">
+            <div class="intro">We invite you to share in our happily ever after</div>
             <h1 class="names">Swathi & Jibin</h1>
             <div class="divider"></div>
-            <div class="details" >
-                Wednesday, the nineteenth of August<br>
-                Two Thousand and Twenty-Six<br>
-                at 6 o'clock in the morning (08/19/2026)
-                <span style="display: block; color: var(--header-gold); margin-top: 10px;">Guruvayur Sree Krishna Temple </span>
-            </div>
+            <div class="details">Wednesday, the nineteenth of August, 2026<br>Guruvayur Sree Krishna Temple</div>
         </div>
-    </section>
-
-    <!-- SECTION 2: OUR STORY -->
-    <section id="story">
-        <div class="section-card">
+        <div id="content-story">
             <h2>Our Story</h2>
-            <div class="section-subtitle">Second star to the right, and straight on 'til morning</div>
-            <div class="divider"></div>
-            <!-- AI Generated Story Image -->
-            <img src="image_2.png" alt="Our Story" class="ai-image" style="margin-top: 10px;">
             <p>Our journey began much like a fairytale. Two paths crossing unexpectedly, leading to endless conversations, late-night adventures, and a shared realization that we'd found our perfect match.</p>
             <p>From exploring real magic in our daily lives to planning this special celebration, every step together has been a wonder. We cannot wait to begin this next chapter with the family and friends we hold dearest.</p>
+            <img src="image_2.png" alt="Story" class="ai-image">
         </div>
-    </section>
-
-    <!-- SECTION 3: THE SCHEDULE -->
-    <section id="schedule">
-        <div class="section-card">
+        <div id="content-schedule">
             <h2>The Schedule</h2>
-            <div class="section-subtitle">Celebrate the Magic</div>
-            <div class="divider"></div>
-            
             <div class="timeline">
-                <div class="timeline-item">
-                    <div class="time">6:00 AM - 7:00 AM</div>
-                    <h3 class="event-title">Thalikettu</h3>
-                </div>
-                <div class="timeline-item">
-                    <div class="time">9:00 AM - 11:00 AM</div>
-                    <h3 class="event-title">Wedding Ceremony</h3>
-                    <p style="font-size: 1.1rem; margin-bottom: 0;">Gokulam Vanamala Auditorium, Guruvayur</p>
-                </div>
+                <div class="timeline-item"><div class="time">6:00 AM - 7:00 AM</div><h3 class="event-title">Thalikettu</h3><p>Guruvayur Temple Nada</p></div>
+                <div class="timeline-item"><div class="time">9:00 AM - 11:00 AM</div><h3 class="event-title">Wedding Ceremony</h3><p>Gokulam Vanamala Auditorium</p></div>
+                <div class="divider" style="margin-top: 40px;"></div>
+            <h2>Thank You</h2>
+            <p>Your presence is the greatest gift of all.</p>
             </div>
         </div>
-    </section>
-
-    <!-- SECTION: LOCATION -->
-    <section id="location">
-        <div class="section-card">
-            <h2>Venue & Location</h2>
-            <div class="section-subtitle">Guruvayur Sree Krishna Temple</div>
-            <div class="divider"></div>
-            <div class="map-container">
-                <!-- Embedded Google Map with Sree Krishna Temple Pin -->
-                <iframe 
-                    src="https://maps.google.com/maps?q=Guruvayur%20Sree%20Krishna%20Temple,%20Guruvayur,%20Kerala,%20India&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Guruvayur+Sree+Krishna+Temple" target="_blank" class="btn">Get Directions</a>
-        </div>
-    </section>
-
-
-    <!-- SECTION 6: RSVP -->
-    <section id="rsvp">
-        <div class="section-card">
-            <h2>Will You Join Us?</h2>
-            <div class="section-subtitle">Kindly RSVP by August 15th, 2026</div>
-            <div class="divider"></div>
-            
-            <form action="#" method="POST">
-                <label for="name">Your Name(s)</label>
-                <input type="text" id="name" name="name" placeholder="First and Last Name" required>
-
-                <label for="attendance">Will you attend?</label>
-                <select id="attendance" name="attendance" required>
-                    <option value="" disabled selected>Please choose...</option>
-                    <option value="yes">Accepts with pleasure</option>
-                    <option value="no">Declines with regret</option>
-                </select>
-
-                <label for="message">Note to the Couple (Optional)</label>
-                <textarea id="message" name="message" rows="4" placeholder="Share a warm wish!"></textarea>
-
-                <button type="submit" class="btn">Submit RSVP</button>
-            </form>
-        </div>
-    </section>
+    </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Highly robust trigger points
-            const appearOptions = {
-                threshold: 0.05, // Trigger as soon as 5% of the element is visible
-                rootMargin: "0px 0px -50px 0px"
-            };
+        document.addEventListener("DOMContentLoaded", function () {
+            // --- Content Cloning ---
+            document.getElementById('desktop-welcome').innerHTML = document.getElementById('content-welcome').innerHTML;
+            document.getElementById('desktop-story').innerHTML = document.getElementById('content-story').innerHTML;
+            document.getElementById('desktop-schedule').innerHTML = document.getElementById('content-schedule').innerHTML;
+            document.getElementById('mobile-welcome').innerHTML = document.getElementById('content-welcome').innerHTML;
+            document.getElementById('mobile-story').innerHTML = document.getElementById('content-story').innerHTML;
+            document.getElementById('mobile-schedule').innerHTML = document.getElementById('content-schedule').innerHTML;
+            const backgroundMusic = document.getElementById('background-music');
+            // --- Logic ---
+            const isMobile = window.innerWidth <= 900;
+            const book = document.querySelector(isMobile ? '.mobile-book' : '.book');
+            const pages = book.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('nav a');
+            const pageCount = pages.length-1;
+            let currentPage = 0;
+            
+            // --- THIS IS THE FIX ---
+            // Set initial stacking order for all pages
+            pages.forEach((page, index) => {
+                page.style.zIndex = pageCount - index;
+            });
+            // --- END OF FIX ---
 
-            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        
-                        // FIX: Once an element fades in, we stop observing it.
-                        // This prevents any scroll feedback loops and makes scrolling 100% jitter-free.
-                        observer.unobserve(entry.target);
+            function updateNav() {
+                navLinks.forEach(link => {
+                    const pageNumAttr = link.getAttribute(isMobile ? 'data-page-mobile' : 'data-page-desktop');
+                    if (!pageNumAttr) return;
+
+                    const pageNum = parseInt(pageNumAttr);
+                    if (pageNum === currentPage) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
                     }
                 });
-            }, appearOptions);
+            }
 
-            const cards = document.querySelectorAll('.section-card');
-            cards.forEach(card => {
-                appearOnScroll.observe(card);
+            function goToPage(pageNum) {
+                const maxPage = isMobile ? pageCount-1 : (pageCount * 2 - 1);
+                if (pageNum < 0 || pageNum > maxPage) return;
+
+                   if (pageNum==1 && backgroundMusic) {
+                    backgroundMusic.play();
+                }
+
+                currentPage = pageNum;
+                let pagesToFlip = 0;
+                
+                if (isMobile) {
+                    pagesToFlip = pageNum;
+                } else {
+                    // This maps the logical page (0=Welcome, 1=Story, 2=Schedule...) to the physical page to flip
+                    pagesToFlip = Math.floor(pageNum / 2) + (pageNum % 2);
+                }
+
+                pages.forEach((page, index) => {
+                    if (index < pagesToFlip) {
+                        page.classList.add('flipped');
+                    } else {
+                        page.classList.remove('flipped');
+                    }
+                });
+                updateNav();
+            }
+
+            // Event Listeners for Nav and Book Clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const attr = isMobile ? 'data-page-mobile' : 'data-page-desktop';
+                    if (e.currentTarget.hasAttribute(attr)) {
+                        const targetPage = parseInt(e.currentTarget.getAttribute(attr));
+                        goToPage(targetPage);
+                    }
+                });
             });
+
+            book.addEventListener('click', (e) => {
+                if (e.target.closest('a')) return;
+                const bookRect = book.getBoundingClientRect();
+                const isRightHalf = e.clientX > bookRect.left + bookRect.width / 2;
+                goToPage(isRightHalf ? currentPage + 1 : currentPage - 1);
+            });
+
+            // Initial setup
+            goToPage(0);
         });
     </script>
 </body>
+
 </html>
