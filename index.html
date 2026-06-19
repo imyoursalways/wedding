@@ -145,6 +145,43 @@
             background-repeat: no-repeat;
         }
 
+        /* --- TOUCH INDICATOR --- */
+        .touch-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgb(249, 22, 22);
+            font-size: 1.2rem;
+            background-color: rgba(0, 0, 0, 0.538);
+            text-align: center;
+            border-radius: 4px;
+            padding: 8px;
+            pointer-events: none;
+            z-index: 100;
+            display: none; /* Hidden by default */
+        }
+        
+        .touch-indicator .chevrons {
+            display: flex;
+            justify-content: space-between;
+            width: 100px; /* Adjust width as needed */
+            margin: 5px auto 0;
+        }
+        
+        .touch-indicator .chevron {
+            opacity: 0;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .touch-indicator .chevron.left { animation-delay: 0.5s; }
+        .touch-indicator .chevron.right { animation-delay: 0s; }
+    
+         @keyframes pulse {
+            0% { opacity: 0; transform: translateX(0); }
+            50% { opacity: 0.8; }
+            100% { opacity: 0; transform: translateX(0); }
+        }
 
         /* --- MOBILE BOOK --- */
         .mobile-book {
@@ -325,6 +362,15 @@
         <div class="page" id="mp2"><div class="front"><div class="page-content" id="mobile-story"></div></div></div>
         <div class="page" id="mp3"><div class="front"><div class="page-content" id="mobile-schedule"></div></div></div>
         <div class="page" id="mp4"><div class="front"><div class="page-content" id="mobile-thankyou"></div></div></div>
+
+         <!-- Touch Indicator Added Here -->
+        <div class="touch-indicator">
+            Tap to Turn
+            <div class="chevrons">
+                <span class="chevron left">&laquo;</span>
+                <span class="chevron right">&raquo;</span>
+            </div>
+        </div>
     </div>
 
     <!-- Universal Content Source -->
@@ -365,6 +411,7 @@
             document.getElementById('mobile-story').innerHTML = document.getElementById('content-story').innerHTML;
             document.getElementById('mobile-schedule').innerHTML = document.getElementById('content-schedule').innerHTML;
             const backgroundMusic = document.getElementById('background-music');
+            const touchIndicator = document.querySelector('.touch-indicator');
             // --- Logic ---
             const isMobile = window.innerWidth <= 900;
             const book = document.querySelector(isMobile ? '.mobile-book' : '.book');
@@ -412,6 +459,10 @@
                     pagesToFlip = Math.floor(pageNum / 2) + (pageNum % 2);
                 }
 
+                   // Hide touch indicator after first interaction
+                if (isMobile && touchIndicator && pageNum > 0) {
+                   touchIndicator.style.display = 'none';
+                }
                 pages.forEach((page, index) => {
                     if (index < pagesToFlip) {
                         page.classList.add('flipped');
