@@ -12,7 +12,12 @@
         :root {
             --header-gold: #DAB96B;
             --text-light: #FAF3E0;
-            --glass-bg: rgba(20, 20, 20, 0.9);
+            --glass-bg: rgba(20, 20, 20, 0.95);
+             /* -- The number of unique images you have -- */
+    --total-images: 8; 
+    
+    /* -- IMPORTANT: Control card size here. Lower number = bigger cards -- */
+    --visible-cards: 4;
         }
 
         /* Basic Setup & Background */
@@ -43,7 +48,7 @@
 
         .carousel-container {
             width: 90%;
-            max-width: 1000px;
+            max-width: 6000px;
             overflow: hidden;
             position: relative;
         }
@@ -52,11 +57,11 @@
             display: flex;
             width: 200%;
             /* 2x the number of original images */
-            animation: slide 30s linear infinite;
+            animation: slide 20s linear infinite;
         }
 
         .card {
-            width: 15%;
+            width: 35%;
             /* 100% / 10 total items = 10% per card */
             flex-shrink: 0;
             box-sizing: border-box;
@@ -85,7 +90,7 @@
             }
 
             100% {
-                transform: translateX(-50%);
+                transform: translateX(-400%);
             }
         }
 
@@ -518,7 +523,7 @@
     <div id="content-source" style="display: none;">
         <div id="content-welcome" style="text-align: center">
             <div class="intro">We invite you to share in our happily ever after</div>
-            <h1 class="names">Swathi </br>&</br> Jibin</h1>
+            <h1 class="names">Swathi & Jibin</h1>
             <div class="divider"></div>
             <div class="details">Wednesday, the nineteenth of August, 2026<br>Guruvayur Sree Krishna Temple</div>
         </div>
@@ -603,20 +608,20 @@
         </div>
         <div id="content-schedule">
             <h2>The Schedule</h2>
-     
+
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="time">6:00 AM - 7:00 AM</div>
                     <h3 class="event-title">Thalikettu</h3>
                     <p>Guruvayur Temple Nada</p>
                 </div>
-                
+
                 <div class="timeline-item">
                     <div class="time">9:00 AM - 11:00 AM</div>
                     <h3 class="event-title">Wedding Ceremony</h3>
                     <p>Gokulam Vanamala Auditorium</p>
                 </div>
-                
+
                 <div class="timeline-item">
                     <div class="time">11:00 AM - 12:00 AM</div>
                     <h3 class="event-title"> Lunch</h3>
