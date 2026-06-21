@@ -30,6 +30,54 @@
             font-size: 1.3rem;
         }
 
+        .carousel-container {
+            width: 90%;
+            max-width: 1000px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-slide {
+            display: flex;
+            width: 200%;
+            /* 2x the number of original images */
+            animation: slide 30s linear infinite;
+        }
+
+        .card {
+            width: 15%;
+            /* 100% / 10 total items = 10% per card */
+            flex-shrink: 0;
+            box-sizing: border-box;
+            margin: 0 20px;
+            background-color: #fff;
+            padding-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            width: 90%;
+            display: inline-block;
+            border-radius: 10px;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
         .background-container {
             position: fixed;
             top: 0;
@@ -151,7 +199,7 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            color: rgb(249, 22, 22);
+            color: rgb(253, 251, 251);
             font-size: 1.2rem;
             background-color: rgba(0, 0, 0, 0.538);
             text-align: center;
@@ -159,28 +207,45 @@
             padding: 8px;
             pointer-events: none;
             z-index: 100;
-            display: none; /* Hidden by default */
+            display: none;
+            /* Hidden by default */
         }
-        
+
         .touch-indicator .chevrons {
             display: flex;
             justify-content: space-between;
-            width: 100px; /* Adjust width as needed */
+            width: 100px;
+            /* Adjust width as needed */
             margin: 5px auto 0;
         }
-        
+
         .touch-indicator .chevron {
             opacity: 0;
             animation: pulse 1.5s infinite;
         }
-        
-        .touch-indicator .chevron.left { animation-delay: 0.5s; }
-        .touch-indicator .chevron.right { animation-delay: 0s; }
-    
-         @keyframes pulse {
-            0% { opacity: 0; transform: translateX(0); }
-            50% { opacity: 0.8; }
-            100% { opacity: 0; transform: translateX(0); }
+
+        .touch-indicator .chevron.left {
+            animation-delay: 0.5s;
+        }
+
+        .touch-indicator .chevron.right {
+            animation-delay: 0s;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0;
+                transform: translateX(0);
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateX(0);
+            }
         }
 
         /* --- MOBILE BOOK --- */
@@ -196,6 +261,14 @@
             top: 0;
             left: 0;
         }
+
+        .mobile-book .welcome-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
 
         .mobile-book .front {
             padding: 30px 25px;
@@ -218,8 +291,14 @@
             text-align: center;
             width: 100%;
             max-width: 500px;
-        } 
-    
+        }
+
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
 
         h1.names {
             font-family: 'Alex Brush', cursive;
@@ -315,11 +394,12 @@
             .book {
                 display: none;
             }
- 
+
             /* Show indicator on mobile */
             .touch-indicator {
                 display: block;
             }
+
             nav a[data-desktop-only] {
                 display: none;
             }
@@ -328,16 +408,30 @@
                 display: inline-block;
             }
 
-            h1.names { font-size: 4rem; }
-            h2 { font-size: 3rem; }
-            p, .details, .intro { font-size: 1.3rem; }
-            nav a { font-size: 1.1rem; margin: 0 10px; }
+            h1.names {
+                font-size: 4rem;
+            }
+
+            h2 {
+                font-size: 3rem;
+            }
+
+            p,
+            .details,
+            .intro {
+                font-size: 1.3rem;
+            }
+
+            nav a {
+                font-size: 1.1rem;
+                margin: 0 10px;
+            }
         }
     </style>
 </head>
 
 <body>
-<audio id="background-music" loop src="music_1.mp3"></audio>
+    <audio id="background-music" loop src="music_1.mp3"></audio>
     <div class="background-container"></div>
 
     <nav>
@@ -351,25 +445,56 @@
     <div class="book">
         <div class="static-page"></div>
         <div class="page" id="dp1">
-            <div class="front"><div class="page-content" id="desktop-welcome"></div></div>
-            <div class="back"><div class="page-content" id="desktop-story"></div></div>
+            <div class="front">
+                <div class="page-content welcome-page" id="desktop-welcome"></div>
+            </div>
+            <div class="back">
+                <div class="page-content" id="desktop-story"></div>
+            </div>
         </div>
         <div class="page" id="dp2">
-            <div class="front"><div class="page-content" id="desktop-schedule"></div></div>
-            <div class="back"><div class="page-content" id="desktop-thankyou"></div></div>
+            <div class="front">
+                <div class="page-content" id="desktop-schedule"></div>
+            </div>
+            <div class="back">
+                <div class="page-content" id="desktop-thankyou"></div>
+            </div>
         </div>
     </div>
 
     <!-- MOBILE BOOK -->
     <div class="mobile-book">
-        <div class="page" id="mobile-cover-page"><div class="front"></div></div>
-        <div class="page" id="mp1"><div class="front"><div class="page-content" id="mobile-welcome"></div></div></div>
-        <div class="page" id="mp2"><div class="front"><div class="page-content" id="mobile-story"></div></div></div>
-        <div class="page" id="mp3"><div class="front"><div class="page-content" id="mobile-schedule"></div></div></div>
-        <div class="page" id="mp4"><div class="front"><div class="page-content" id="mobile-thankyou"></div></div></div>
+        <div class="page" id="mobile-cover-page">
+            <div class="front"></div>
+        </div>
+        <div class="page" id="mp1">
+            <div class="front">
+                <div class="page-content welcome-page" id="mobile-welcome"></div>
+            </div>
+        </div>
+        <div class="page" id="mp2">
+            <div class="front">
+                <div class="page-content" id="mobile-story"></div>
+            </div>
+        </div>
+        <div class="page" id="mp3">
+            <div class="front">
+                <div class="page-content" id="mobile-schedule"></div>
+            </div>
+        </div>
+        <div class="page" id="mp4">
+            <div class="front">
+                <div class="page-content" id="mobile-thankyou"></div>
+            </div>
+        </div>
 
-         <!-- Touch Indicator Added Here -->
+        <!-- Touch Indicator Added Here -->
         <div class="touch-indicator">
+
+            ❤️ This invitation is exclusively for you ❤️
+            </br>
+            </br>
+            </br>
             Tap to Turn
             <div class="chevrons">
                 <span class="chevron left">&laquo;</span>
@@ -380,7 +505,7 @@
 
     <!-- Universal Content Source -->
     <div id="content-source" style="display: none;">
-        <div id="content-welcome">
+        <div id="content-welcome" style="text-align: center">
             <div class="intro">We invite you to share in our happily ever after</div>
             <h1 class="names">Swathi & Jibin</h1>
             <div class="divider"></div>
@@ -388,15 +513,96 @@
         </div>
         <div id="content-story">
             <h2>Our Story</h2>
-            <p>Our journey began much like a fairytale. Two paths crossing unexpectedly, leading to endless conversations, late-night adventures, and a shared realization that we'd found our perfect match.</p>
-            <p>From exploring real magic in our daily lives to planning this special celebration, every step together has been a wonder. We cannot wait to begin this next chapter with the family and friends we hold dearest.</p>
-            <img src="image_2.png" alt="Story" class="ai-image">
+            <p>Our journey began much like a fairytale. Two paths crossing unexpectedly, leading to endless
+                conversations, late-night adventures, and a shared realization that we'd found our perfect match.</p>
+            <p>From exploring real magic in our daily lives to planning this special celebration, every step together
+                has been a wonder. We cannot wait to begin this next chapter with the family and friends we hold
+                dearest.</p>
+            <div class="carousel-container">
+                <div class="carousel-slide">
+
+
+                    <!-- Image 2 -->
+                    <div class="card">
+                        <img src="img_5.jpg" alt="Image 5">
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="card">
+                        <img src="img_6.jpg" alt="Image 6">
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="card">
+                        <img src="img_7.jpg" alt="Image 7">
+                    </div>
+                    <div class="card">
+                        <img src="img_8.png" alt="Image 9">
+                    </div>
+                    <div class="card">
+                        <img src="img_4.jpg" alt="Image 4">
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="card">
+                        <img src="img_9.jpg" alt="Image 10">
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="card">
+                        <img src="img_10.jpg" alt="Image 11">
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="card">
+                        <img src="img_4.jpg" alt="Image 12">
+                    </div>
+
+
+                    <!-- Duplicate set for seamless loop -->
+
+
+                    <div class="card">
+                        <img src="img_5.jpg" alt="Image 5">
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="card">
+                        <img src="img_6.jpg" alt="Image 6">
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="card">
+                        <img src="img_7.jpg" alt="Image 7">
+                    </div>
+                    <div class="card">
+                        <img src="img_8.png" alt="Image 9">
+                    </div>
+                    <div class="card">
+                        <img src="img_4.jpg" alt="Image 4">
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="card">
+                        <img src="img_9.jpg" alt="Image 10">
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="card">
+                        <img src="img_10.jpg" alt="Image 11">
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="card">
+                        <img src="img_4.jpg" alt="Image 12">
+                    </div>
+
+                </div>
+            </div>
         </div>
         <div id="content-schedule">
             <h2>The Schedule</h2>
             <div class="timeline">
-                <div class="timeline-item"><div class="time">6:00 AM - 7:00 AM</div><h3 class="event-title">Thalikettu</h3><p>Guruvayur Temple Nada</p></div>
-                <div class="timeline-item"><div class="time">9:00 AM - 11:00 AM</div><h3 class="event-title">Wedding Ceremony</h3><p>Gokulam Vanamala Auditorium</p></div>
+                <div class="timeline-item">
+                    <div class="time">6:00 AM - 7:00 AM</div>
+                    <h3 class="event-title">Thalikettu</h3>
+                    <p>Guruvayur Temple Nada</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">9:00 AM - 11:00 AM</div>
+                    <h3 class="event-title">Wedding Ceremony</h3>
+                    <p>Gokulam Vanamala Auditorium</p>
+                </div>
                 <div class="divider" style="margin-top: 40px;"></div>
                 <div style="text-align: center;">
                     <h2>Thank You</h2>
@@ -422,9 +628,9 @@
             const book = document.querySelector(isMobile ? '.mobile-book' : '.book');
             const pages = book.querySelectorAll('.page');
             const navLinks = document.querySelectorAll('nav a');
-            const pageCount = pages.length-1;
+            const pageCount = pages.length - 1;
             let currentPage = 0;
-            
+
             // --- THIS IS THE FIX ---
             // Set initial stacking order for all pages
             pages.forEach((page, index) => {
@@ -447,16 +653,16 @@
             }
 
             function goToPage(pageNum) {
-                const maxPage = isMobile ? pageCount-1 : (pageCount * 2 - 1);
+                const maxPage = isMobile ? pageCount - 1 : (pageCount * 2 - 1);
                 if (pageNum < 0 || pageNum > maxPage) return;
 
-                   if (pageNum==1 && backgroundMusic) {
+                if (pageNum == 1 && backgroundMusic) {
                     backgroundMusic.play();
                 }
 
                 currentPage = pageNum;
                 let pagesToFlip = 0;
-                
+
                 if (isMobile) {
                     pagesToFlip = pageNum;
                 } else {
@@ -464,9 +670,9 @@
                     pagesToFlip = Math.floor(pageNum / 2) + (pageNum % 2);
                 }
 
-                   // Hide touch indicator after first interaction
+                // Hide touch indicator after first interaction
                 if (isMobile && touchIndicator && pageNum > 0) {
-                   touchIndicator.style.display = 'none';
+                    touchIndicator.style.display = 'none';
                 }
                 pages.forEach((page, index) => {
                     if (index < pagesToFlip) {
