@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swathi & Jibin - Wedding Invitation</title>
+    <title data-translate="title">Swathi & Jibin - Wedding Invitation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Dancing+Script:wght@400;700&display=swap');
@@ -66,10 +66,10 @@
             flex-shrink: 0;
             box-sizing: border-box;
             margin: 0 20px;
-            background-color: #fff;
+            background-color:rgba(254, 254, 254, 0.1);
             padding-top: 10px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(254, 254, 254, 0.1);
             transition: transform 0.1s ease, box-shadow 0.1s ease;
         }
 
@@ -443,7 +443,29 @@
                 margin: 0 10px;
             }
         }
-    </style>
+    
+        /* --- Language Switcher --- */
+        .lang-switcher {
+            position: fixed;
+            top: 60px; /* Adjust as needed */
+            right: 20px;
+            z-index: 110;
+        }
+
+        .lang-switcher a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .lang-switcher a.active {
+            color: var(--header-gold);
+            text-decoration: underline;
+        }
+</style>
 </head>
 
 <body>
@@ -451,11 +473,16 @@
     <div class="background-container"></div>
 
     <nav>
-        <a data-page-desktop="0" data-page-mobile="1">Welcome</a>
-        <a data-page-desktop="1" data-page-mobile="2">Our Story</a>
-        <a data-page-desktop="2" data-page-mobile="3">Schedule</a>
+        <a data-page-desktop="0" data-page-mobile="1" data-translate="nav_welcome">Welcome</a>
+        <a data-page-desktop="1" data-page-mobile="2" data-translate="nav_our_story">Our Story</a>
+        <a data-page-desktop="2" data-page-mobile="3" data-translate="nav_schedule">Schedule</a>
         <a data-page-desktop="3" data-page-mobile="4" style="display: none;">Thank You</a>
     </nav>
+    <div class="lang-switcher">
+        <a id="lang-en" class="active">English</a>
+        <a id="lang-ml">മലയാളം</a>
+    </div>
+
 
     <!-- DESKTOP BOOK -->
     <div class="book">
@@ -507,11 +534,11 @@
         <!-- Touch Indicator Added Here -->
         <div class="touch-indicator">
 
-            ❤️ This invitation is exclusively for you ❤️
+            <span data-translate="touch_exclusive">❤️ This invitation is exclusively for you ❤️</span>
             </br>
             </br>
             </br>
-            Tap to Turn
+            <span data-translate="touch_tap">Tap to Turn</span>
             <div class="chevrons">
                 <span class="chevron left">&laquo;</span>
                 <span class="chevron right">&raquo;</span>
@@ -522,18 +549,15 @@
     <!-- Universal Content Source -->
     <div id="content-source" style="display: none;">
         <div id="content-welcome" style="text-align: center">
-            <div class="intro">We invite you to share in our happily ever after</div>
-            <h1 class="names">Swathi </br>&</br> Jibin</h1>
+            <div class="intro" data-translate="intro">We invite you to share in our happily ever after</div>
+            <h1 class="names" data-translate="names">Swathi </br>&</br> Jibin</h1>
             <div class="divider"></div>
-            <div class="details">Wednesday, the nineteenth of August, 2026<br>Guruvayur Sree Krishna Temple</div>
+            <div class="details" data-translate="date_location">Wednesday, 19 August, 2026<br>Guruvayur Sree Krishna Temple</div>
         </div>
         <div id="content-story">
-            <h2>Our Story</h2>
-            <p>Our journey began much like a fairytale. Two paths crossing unexpectedly, leading to endless
-                conversations, late-night adventures, and a shared realization that we'd found our perfect match.</p>
-            <p>From exploring real magic in our daily lives to planning this special celebration, every step together
-                has been a wonder. We cannot wait to begin this next chapter with the family and friends we hold
-                dearest.</p>
+            <h2 data-translate="our_story_h2">Our Story</h2>
+            <p data-translate="story_p1">Our journey began much like a fairytale. Two paths crossing unexpectedly, leading to endless conversations, late-night adventures, and a shared realization that we'd found our perfect match.</p>
+            <p data-translate="story_p2">From exploring real magic in our daily lives to planning this special celebration, every step together has been a wonder. We cannot wait to begin this next chapter with the family and friends we hold dearest.</p>
             <div class="carousel-container">
                 <div class="carousel-slide">
 
@@ -551,9 +575,6 @@
                         <img src="img_7.jpg" alt="Image 7">
                     </div>
                     <div class="card">
-                        <img src="img_8.png" alt="Image 9">
-                    </div>
-                    <div class="card">
                         <img src="img_4.jpg" alt="Image 4">
                     </div>
                     <!-- Image 2 -->
@@ -564,11 +585,7 @@
                     <div class="card">
                         <img src="img_10.jpg" alt="Image 11">
                     </div>
-                    <!-- Image 4 -->
-                    <div class="card">
-                        <img src="img_4.jpg" alt="Image 12">
-                    </div>
-
+                
 
                     <!-- Duplicate set for seamless loop -->
 
@@ -585,9 +602,6 @@
                         <img src="img_7.jpg" alt="Image 7">
                     </div>
                     <div class="card">
-                        <img src="img_8.png" alt="Image 9">
-                    </div>
-                    <div class="card">
                         <img src="img_4.jpg" alt="Image 4">
                     </div>
                     <!-- Image 2 -->
@@ -598,61 +612,145 @@
                     <div class="card">
                         <img src="img_10.jpg" alt="Image 11">
                     </div>
-                    <!-- Image 4 -->
-                    <div class="card">
-                        <img src="img_4.jpg" alt="Image 12">
-                    </div>
+                
 
                 </div>
             </div>
         </div>
         <div id="content-schedule">
-            <h2>The Schedule</h2>
+            <h2 data-translate="schedule_h2">The Schedule</h2>
 
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="time">6:00 AM - 7:00 AM</div>
-                    <h3 class="event-title">Thalikettu</h3>
-                    <p>Guruvayur Temple Nada</p>
+                    <div class="time">5:00 AM - 6:00 AM</div>
+                    <h3 class="event-title" data-translate="event1_title">Thalikettu</h3>
+                    <p data-translate="event1_location">Guruvayur Temple Nada</p>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="time">9:00 AM - 11:00 AM</div>
-                    <h3 class="event-title">Wedding Ceremony</h3>
-                    <p>Gokulam Vanamala Auditorium</p>
+                    <div class="time">9:30 AM - 11:00 AM</div>
+                    <h3 class="event-title" data-translate="event2_title">Wedding Ceremony</h3>
+                    <p data-translate="event2_location">Gokulam Vanamala Auditorium</p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="time">11:00 AM - 12:00 PM</div>
-                    <h3 class="event-title"> Lunch</h3>
-                    <p>Gokulam Vanamala Auditorium</p>
+                    <h3 class="event-title" data-translate="event3_title"> Lunch</h3>
+                    <p data-translate="event3_location">Gokulam Vanamala Auditorium</p>
                 </div>
 
                 <div style="text-align: center;">
                     <a href="https://www.google.com/maps/place/Sree+Gokulam+Vanamala/@10.593086,76.0376152,1011m/data=!3m1!1e3!4m9!3m8!1s0x3ba7948a1a3f5379:0x7e6854449c21c7c2!5m2!4m1!1i2!8m2!3d10.593086!4d76.0401901!16s%2Fg%2F11bwpdsr8\_?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D"
                         class="map-link">
-                        <i class="fa-solid fa-location-dot" style="color: hsl(349, 92%, 48%);"></i> View on Google Maps
+                        <i class="fa-solid fa-location-dot" style="color: hsl(349, 92%, 48%);"></i> <span data-translate="map_link">View on Google Maps</span>
                     </a>
                 </div>
 
                 <div class="divider" style="margin-top: 40px;"></div>
                 <div style="text-align: center;">
-                    <h2>Thank You</h2>
-                    <p>Your presence is the greatest gift of all.</p>
+                    <h2 data-translate="thank_you_h2">Thank You</h2>
+                    <p data-translate="thank_you_p">Your presence is the greatest gift of all.</p>
                 </div>
             </div>
         </div>
     </div>
 
+    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            const translations = {
+                en: {
+                    title: "Swathi & Jibin - Wedding Invitation",
+                    nav_welcome: "Welcome",
+                    nav_our_story: "Our Story",
+                    nav_schedule: "Schedule",
+                    intro: "We invite you to share in our happily ever after",
+                    names: "Swathi </br>&</br> Jibin",
+                    date_location: "Wednesday, the nineteenth of August, 2026<br>Guruvayur Sree Krishna Temple",
+                    our_story_h2: "Our Story",
+                    story_p1: "Our journey began much like a fairytale. Two paths crossing unexpectedly, leading to endless conversations, late-night adventures, and a shared realization that we'd found our perfect match.",
+                    story_p2: "From exploring real magic in our daily lives to planning this special celebration, every step together has been a wonder. We cannot wait to begin this next chapter with the family and friends we hold dearest.",
+                    schedule_h2: "The Schedule",
+                    event1_title: "Thalikettu",
+                    event1_location: "Guruvayur Temple Nada",
+                    event2_title: "Wedding Ceremony",
+                    event2_location: "Gokulam Vanamala Auditorium",
+                    event3_title: "Lunch",
+                    event3_location: "Gokulam Vanamala Auditorium",
+                    map_link: "View on Google Maps",
+                    thank_you_h2: "Thank You",
+                    thank_you_p: "Your presence is the greatest gift of all.",
+                    touch_exclusive: "❤️ This invitation is exclusively for you ❤️",
+                    touch_tap: "Tap to Turn"
+                },
+                ml: {
+                    title: "സ്വാതി & ജിബിൻ - വിവാഹ ക്ഷണം",
+                    nav_welcome: "സ്വാഗതം",
+                    nav_our_story: "യാത്ര",
+                    nav_schedule: "പരിപാടികൾ",
+                    intro: "ഞങ്ങളുടെ സന്തോഷത്തിൽ പങ്കുചേരാൻ നിങ്ങളെ ഹൃദയപൂർവ്വം ക്ഷണിക്കുന്നു.",
+                    names: "സ്വാതി </br>&</br> ജിബിൻ",
+                    date_location: "2026 ഓഗസ്റ്റ് 19, ബുധനാഴ്ച<br>ഗുരുവായൂർ ശ്രീകൃഷ്ണസ്വാമി ക്ഷേത്രം",
+                    our_story_h2: "പ്രണയയാത്ര",
+                    story_p1: "ഒരു കാല്പനികത പോലെയാണ് ഞങ്ങളുടെ യാത്ര തുടങ്ങിയത്. അപ്രതീക്ഷിതമായി രണ്ട് വഴികൾ കൂടിച്ചേർന്നു, അത് അനന്തമായ സംഭാഷണങ്ങളിലേക്കും ഒരുമിച്ച് ഉള്ള യാത്രകളിലേക്കും നയിച്ചു, ഞങ്ങളിലെ പ്രണയം കണ്ടെത്തിയെന്ന തിരിച്ചറിവിലേക്കും.",
+                    story_p2: "തമ്മിൽ കണ്ടുമുട്ടിയ നാൾ മുതൽ ഓരോ നിമിഷവും, ജീവിതത്തിലെ ഈ അതുല്യ നിമിഷം ആസൂത്രണം ചെയ്യുന്നതുവരെ, ഒരുമിച്ചുള്ള ഓരോ ചുവടും ഒരു അത്ഭുതമായിരുന്നു, ഇനി മുന്നോട്ടും. ഞങ്ങൾ ഏറ്റവും പ്രിയപ്പെട്ട കുടുംബാംഗങ്ങളോടും സുഹൃത്തുക്കളോടുമൊപ്പം ഈ അടുത്ത അധ്യായം ആരംഭിക്കാൻ കാത്തിരിക്കുകയാണ്. കഥ തുടരും ...",
+                    schedule_h2: "പരിപാടികൾ",
+                    event1_title: "താലികെട്ട്",
+                    event1_location: "ഗുരുവായൂർ ക്ഷേത്രനടയിൽ",
+                    event2_title: "വിവാഹ സൽക്കാരം",
+                    event2_location: "ഗോകുലം വനമാല ഓഡിറ്റോറിയം",
+                    event3_title: "സദ്യ",
+                    event3_location: "ഗോകുലം വനമാല ഓഡിറ്റോറിയം",
+                    map_link: "ഗൂഗിൾ മാപ്‌സിൽ കാണുക",
+                    thank_you_h2: "നന്ദി",
+                    thank_you_p: "നിങ്ങളുടെ നിറസാന്നിധ്യം കൊണ്ട് ഞങ്ങളുട അതുല്യ നിമിഷത്തെ ധന്യമാകണം.",
+                    touch_exclusive: "❤️ ഈ ക്ഷണം നിങ്ങൾക്ക് മാത്രമുള്ളതാണ് ❤️",
+                    touch_tap: "മുന്നോട് പോകാൻ ടാപ്പ് ചെയ്യുക"
+                }
+            };
+            
             // --- Content Cloning ---
-            document.getElementById('desktop-welcome').innerHTML = document.getElementById('content-welcome').innerHTML;
-            document.getElementById('desktop-story').innerHTML = document.getElementById('content-story').innerHTML;
-            document.getElementById('desktop-schedule').innerHTML = document.getElementById('content-schedule').innerHTML;
-            document.getElementById('mobile-welcome').innerHTML = document.getElementById('content-welcome').innerHTML;
-            document.getElementById('mobile-story').innerHTML = document.getElementById('content-story').innerHTML;
-            document.getElementById('mobile-schedule').innerHTML = document.getElementById('content-schedule').innerHTML;
+            function cloneContent() {
+                document.getElementById('desktop-welcome').innerHTML = document.getElementById('content-welcome').innerHTML;
+                document.getElementById('desktop-story').innerHTML = document.getElementById('content-story').innerHTML;
+                document.getElementById('desktop-schedule').innerHTML = document.getElementById('content-schedule').innerHTML;
+                document.getElementById('mobile-welcome').innerHTML = document.getElementById('content-welcome').innerHTML;
+                document.getElementById('mobile-story').innerHTML = document.getElementById('content-story').innerHTML;
+                document.getElementById('mobile-schedule').innerHTML = document.getElementById('content-schedule').innerHTML;
+            }
+            cloneContent(); // Initial clone
+
+            function setLanguage(lang) {
+                // Must re-clone content before translating to reset any previous translation
+                cloneContent(); 
+                document.querySelectorAll('[data-translate]').forEach(el => {
+                    const key = el.getAttribute('data-translate');
+                    if (translations[lang] && translations[lang][key]) {
+                         if (key === 'title') {
+                            document.title = translations[lang][key];
+                        } else {
+                            el.innerHTML = translations[lang][key];
+                        }
+                    }
+                });
+                document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+                document.getElementById('lang-ml').classList.toggle('active', lang === 'ml');
+                localStorage.setItem('preferredLanguage', lang);
+            }
+
+            const langEnBtn = document.getElementById('lang-en');
+            const langMlBtn = document.getElementById('lang-ml');
+
+            langEnBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                setLanguage('en');
+            });
+            langMlBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                setLanguage('ml');
+            });
+            
+            // The rest of your script from the original file
             const backgroundMusic = document.getElementById('background-music');
             const touchIndicator = document.querySelector('.touch-indicator');
             // --- Logic ---
@@ -663,12 +761,9 @@
             const pageCount = pages.length - 1;
             let currentPage = 0;
 
-            // --- THIS IS THE FIX ---
-            // Set initial stacking order for all pages
             pages.forEach((page, index) => {
                 page.style.zIndex = pageCount - index;
             });
-            // --- END OF FIX ---
 
             function updateNav() {
                 navLinks.forEach(link => {
@@ -685,11 +780,11 @@
             }
 
             function goToPage(pageNum) {
-                const maxPage = isMobile ? pageCount - 1 : (pageCount * 2 - 1);
+                const maxPage = isMobile ? pageCount -1: (pageCount * 2 - 1);
                 if (pageNum < 0 || pageNum > maxPage) return;
-
-                if (pageNum == 1 && backgroundMusic) {
-                    backgroundMusic.play();
+                
+                if (pageNum >= 1 && backgroundMusic.paused) {
+                    backgroundMusic.play().catch(e => console.error("Autoplay was prevented:", e));
                 }
 
                 currentPage = pageNum;
@@ -698,11 +793,9 @@
                 if (isMobile) {
                     pagesToFlip = pageNum;
                 } else {
-                    // This maps the logical page (0=Welcome, 1=Story, 2=Schedule...) to the physical page to flip
                     pagesToFlip = Math.floor(pageNum / 2) + (pageNum % 2);
                 }
 
-                // Hide touch indicator after first interaction
                 if (isMobile && touchIndicator && pageNum > 0) {
                     touchIndicator.style.display = 'none';
                 }
@@ -716,7 +809,6 @@
                 updateNav();
             }
 
-            // Event Listeners for Nav and Book Clicks
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     const attr = isMobile ? 'data-page-mobile' : 'data-page-desktop';
@@ -733,11 +825,20 @@
                 const isRightHalf = e.clientX > bookRect.left + bookRect.width / 2;
                 goToPage(isRightHalf ? currentPage + 1 : currentPage - 1);
             });
+            
+            document.body.addEventListener('click', () => {
+                if(backgroundMusic.paused) {
+                   backgroundMusic.play().catch(e => console.error("Autoplay was prevented:", e));
+                }
+            }, { once: true });
+            
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'en';
+            setLanguage(preferredLanguage);
 
-            // Initial setup
             goToPage(0);
         });
     </script>
+
 </body>
 
 </html>
